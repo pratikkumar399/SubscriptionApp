@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 
 import InputControl from "../Input/Input";
-import { auth } from "../../firebase";
 
 import styles from "./Signup.module.css";
 import { useUserAuth } from "../../context/UserAuthContext";

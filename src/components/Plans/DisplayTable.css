@@ -1,0 +1,30 @@
+/* DisplayPlans.css */
+
+.plans-container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.plans-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.plans-table th, .plans-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.plans-table th {
+    background-color: #f2f2f2;
+}
+
+.plans-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.plans-table tr:hover {
+    background-color: #ddd;
+}

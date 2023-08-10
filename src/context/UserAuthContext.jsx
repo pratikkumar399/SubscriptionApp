@@ -13,6 +13,8 @@ const UserAuthContext = createContext();
 
 export function UserAuthProvider({ children }) {
     const [user, setUser] = useState("");
+    const [pending, setPending] = useState(true);
+
     // implement the login signup and logout functions here
 
     function signup(email, password) {
@@ -25,19 +27,29 @@ export function UserAuthProvider({ children }) {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    function logout() {
+        // implement logout logic here
+        return signOut(auth);
+    }
+
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        onAuthStateChanged(auth, (currentUser) => {
+            console.log("User state changed:", currentUser);
             setUser(currentUser);
+            setPending(false)
         });
         // cleanup subscription on unmount
 
-        return () => unsubscribe();
-
-
     }, []);
 
+    if (pending) {
+        return <>Loading...</>
+    }
+
+
     return (
-        <UserAuthContext.Provider value={{ user, signup, login }}>
+        <UserAuthContext.Provider value={{ user, signup, login, logout }}>
             {children}
         </UserAuthContext.Provider>
     );
