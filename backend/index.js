@@ -15,8 +15,6 @@ app.post('/create-payment-intent', async (req, res) => {
             description, // Add the description to the payment intent
         });
 
-        console.log("Hello")
-
         res.json({ clientSecret: paymentIntent.client_secret });
     } catch (error) {
         console.error('Error creating payment intent:', error);
