@@ -1,31 +1,27 @@
 import { useUserAuth } from '../../context/UserAuthContext';
-// import addPlansToFirestore from '../../Addplans';
 import DisplayPlans from '../Plans/DisplayPlans';
+import './Home.css'; // Import your CSS file
+
 const Home = () => {
     const { user, logout } = useUserAuth();
-    console.log(user);
 
     const handleLogout = async () => {
-        // implement logout logic here
         try {
             await logout();
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
     }
-    // const handleAddDataClick = () => {
-    //     addPlansToFirestore();
-    // };
 
     return (
         <div>
-            <h1 className='text-3xl font-bold underline'>Hello Welcome, {user && user.displayName}</h1>
-            <button onClick={handleLogout}>
-                Log Out
-            </button>
+            <nav className="navbar">
+                <h1 className='logo'>
+                    Hello Welcome, {user && user.displayName}
+                </h1>
 
-            {/* <Plans /> */}
+            </nav>
+
             <DisplayPlans />
         </div>
     )

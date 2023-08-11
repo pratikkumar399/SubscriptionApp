@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import './DisplayTable.css';
+import './DisplayCards.css'; // Import your CSS file for styling cards
+import PlanCard from './PlanCard';
 
 const DisplayPlans = () => {
     const [plans, setPlans] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
-    const [showMonthlyPrice, setShowMonthlyPrice] = useState(true);
+    const [showMonthlyPrice, setShowMonthlyPrice] = useState(false);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -31,123 +31,58 @@ const DisplayPlans = () => {
         setShowMonthlyPrice(!showMonthlyPrice);
     };
 
-    const handlePlanHeaderClick = (plan) => {
-        console.log(plan);
+    const handlePlanClick = (plan) => {
         setSelectedPlan(plan);
-    };
-
-
-    const handleAlert = () => {
-        alert('Please Select a plan to proceed..');
     };
 
     const handleProceed = () => {
         if (selectedPlan) {
-            console.log(selectedPlan); // Check if the correct plan data is logged
-            navigate(`/billing`, { state: { selectedPlan: selectedPlan } });
+            const selectedPrice = showMonthlyPrice
+                ? selectedPlan.monthly_price
+                : selectedPlan.yearly_price;
+
+            const modifiedSelectedPlan = {
+                ...selectedPlan,
+                selectedPrice: selectedPrice
+            };
+
+            navigate(`/billing`, { state: { selectedPlan: modifiedSelectedPlan } });
         } else {
             alert('Please Select a plan to proceed..');
         }
     };
 
     return (
-        <div className="plans-container">
-            <h2>Plans Data</h2>
-            <button onClick={togglePriceDisplay}>
-                Toggle Price Display
-            </button>
-            <table className='plans-table'>
-                <thead>
-                    <tr>
-                        <th>PlanName</th>
-                        {plans.map((plan, index) => (
-                            <th
-                                key={index}
-                                className={selectedPlan === plan ? 'selected' : ''}
-                                onClick={() => handlePlanHeaderClick(plan)}
-                            >
-                                {plan.name}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {showMonthlyPrice ? (
-                        <tr>
-                            <th>Monthly Price</th>
-                            {plans.map((plan, index) => (
-                                <td
-                                    key={index}
-                                    className={selectedPlan === plan ? 'selected' : ''}
-                                >
-                                    {plan.monthly_price}
-                                </td>
-                            ))}
-                        </tr>
-                    ) : (
-                        <tr>
-                            <th>Yearly Price</th>
-                            {plans.map((plan, index) => (
-                                <td
-                                    key={index}
-                                    className={selectedPlan === plan ? 'selected' : ''}
-                                >
-                                    {plan.yearly_price}
-                                </td>
-                            ))}
-                        </tr>
-                    )}
-                    <tr>
-                        <th>Video Quality</th>
-                        {plans.map((plan, index) => (
-                            <td
-                                key={index}
-                                className={selectedPlan === plan ? 'selected' : ''}
-                            >
-                                {plan.video_quality}
-                            </td>
-                        ))}
-                    </tr>
-                    <tr>
-                        <th>Resolution</th>
-                        {plans.map((plan, index) => (
-                            <td
-                                key={index}
-                                className={selectedPlan === plan ? 'selected' : ''}
-                            >
-                                {plan.resolution}
-                            </td>
-                        ))}
-                    </tr>
-                    <tr>
-                        <th>Devices Allowed</th>
-                        {plans.map((plan, index) => (
-                            <td
-                                key={index}
-                                className={selectedPlan === plan ? 'selected' : ''}
-                            >
-                                {plan.devices_allowed.join(', ')}
-                            </td>
-                        ))}
-                    </tr>
-                    <tr>
-                        <th>Active Screens</th>
-                        {plans.map((plan, index) => (
-                            <td
-                                key={index}
-                                className={selectedPlan === plan ? 'selected' : ''}
-                            >
-                                {plan.active_screens}
-                            </td>
-                        ))}
-                    </tr>
-                </tbody>
-            </table>
-            {selectedPlan ? (
-                <button onClick={handleProceed}>Go to Billing</button>
-            ) : (
-                <button onClick={handleAlert}>Please Select a plan to proceed..</button>
-            )}
+        <div className="center-content">
+
+            <div className="header">
+                <h2>Choose the right plan for you</h2>
+                <button className="pricebutton1" onClick={togglePriceDisplay}>
+                    {showMonthlyPrice ? <>Monthly</> : <>Yearly</>}
+                </button>
+            </div>
+
+            <div className="cards">
+                {plans.map((plan, index) => (
+                    <PlanCard
+                        key={index}
+                        plan={plan}
+                        selectedPlan={selectedPlan}
+                        showMonthlyPrice={showMonthlyPrice}
+                        handlePlanClick={handlePlanClick}
+                    />
+                ))}
+            </div>
+
+            <div className="center">
+                {selectedPlan ? (
+                    <button className='pricebutton' onClick={handleProceed}>Go to Billing</button>
+                ) : (
+                    <button className='pricebutton' onClick={() => alert('Please Select a plan to proceed..')}>
+                        Please Select a plan to proceed..
+                    </button>
+                )}
+            </div>
         </div>
     );
 };

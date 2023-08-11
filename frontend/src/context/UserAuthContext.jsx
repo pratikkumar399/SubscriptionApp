@@ -35,12 +35,13 @@ export function UserAuthProvider({ children }) {
 
 
     useEffect(() => {
-        onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("User state changed:", currentUser);
             setUser(currentUser);
             setPending(false)
         });
         // cleanup subscription on unmount
+        return () => unsubscribe();
 
     }, []);
 

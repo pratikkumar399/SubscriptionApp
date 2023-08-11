@@ -1,36 +1,82 @@
+/* Add the following styles to your BillingCard.css */
+
 .billing-card {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .billing-card .side {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .billing-card .side.payment-form {
-    background-color: #f8f8f8;
-  }
-  
-  .billing-card .side.plan-details {
-    background-color: #fff;
-  }
-  
-  .billing-card h2 {
-    margin-top: 0;
-  }
-  
-  .billing-card p {
-    margin: 8px 0;
-  }
-  
-  .payment-form-container {
-    display: flex;
-    justify-content: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Adjust as needed */
+}
+
+.billing-payment {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.billing-payment h2 {
+  margin-top: 0;
+}
+
+.billing-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.billing-section,
+.payment-section {
+  margin-bottom: 20px;
+}
+
+/* Rest of your styles */
+
+/* Rest of your styles */
+
+
+/* Improved styles for payment details section */
+.payment-details {
+  background-color: #fff;
+}
+
+.payment-details form {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-details button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, opacity 0.3s;
+  margin-top: 10px;
+}
+
+.payment-details button:hover {
+  background-color: #0056b3;
+}
+
+.payment-details .error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Style the CardElement */
+.payment-details .StripeElement {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Style the CardElement errors */
+.payment-details .StripeElement--invalid {
+  border-color: red;
+}
