@@ -5,6 +5,11 @@ const app = express();
 const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 app.post('/create-payment-intent', async (req, res) => {
     const { amount, currency, description } = req.body;
 
@@ -21,6 +26,8 @@ app.post('/create-payment-intent', async (req, res) => {
         res.status(500).json({ error: 'Payment intent creation failed' });
     }
 });
+
+
 
 
 const port = process.env.PORT || 3001;
