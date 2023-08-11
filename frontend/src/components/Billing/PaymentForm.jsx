@@ -38,7 +38,7 @@ const PaymentForm = ({ selectedPlan }) => {
 
         try {
             const priceInCents = selectedPlan ? parseFloat(selectedPlan.yearly_price) * 100 : parseFloat(selectedPlan.monthly_price) * 100;
-            const response = await fetch('http://localhost:3001/create-payment-intent', {
+            const response = await fetch('https://subscription-app-4ev2.vercel.app/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
