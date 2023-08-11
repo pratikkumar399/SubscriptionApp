@@ -5,11 +5,9 @@ const app = express();
 const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
+const home = require("./public/home");
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use("/home", home);
 app.post('/create-payment-intent', async (req, res) => {
     const { amount, currency, description } = req.body;
 
