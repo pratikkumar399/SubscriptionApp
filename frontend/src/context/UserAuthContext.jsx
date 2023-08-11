@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useContext, useState } from "react";
 import { auth } from "../firebase";
+import './Loading.css'
 
 
 const UserAuthContext = createContext();
@@ -44,7 +45,15 @@ export function UserAuthProvider({ children }) {
     }, []);
 
     if (pending) {
-        return <>Loading...</>
+        return <>
+            <div className="loading-wave">
+                <div className="loading-bar" />
+                <div className="loading-bar" />
+                <div className="loading-bar" />
+                <div className="loading-bar" />
+            </div>
+
+        </>
     }
 
 

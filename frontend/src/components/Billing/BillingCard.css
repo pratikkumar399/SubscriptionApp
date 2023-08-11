@@ -1,0 +1,36 @@
+.billing-card {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .billing-card .side {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .billing-card .side.payment-form {
+    background-color: #f8f8f8;
+  }
+  
+  .billing-card .side.plan-details {
+    background-color: #fff;
+  }
+  
+  .billing-card h2 {
+    margin-top: 0;
+  }
+  
+  .billing-card p {
+    margin: 8px 0;
+  }
+  
+  .payment-form-container {
+    display: flex;
+    justify-content: center;
+  }
+  
