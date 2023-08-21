@@ -31,4 +31,3 @@
   - Exploring possibilities to integrate additional payment gateways for enhanced user flexibility.
   - Considering the implementation of personalized subscription recommendations based on user preferences.
 
-Remember to quantify your accomplishments where possible, showcase the skills you've utilized, and emphasize the impact your project had on user engagement, retention, and revenue. Tailor the bullet points to reflect your own unique contributions and the specific challenges you overcame during the project.
