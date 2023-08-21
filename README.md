@@ -2,7 +2,7 @@
 
 - **Description:** Developed a user-friendly subscription management app that allows users to seamlessly subscribe to and manage plans on a monthly or yearly basis.
 
-- **Technologies Used:** React, Node.js, Firebase
+- **Technologies Used:** React, Node.js, Firebase, Stripe
 
 - **Accomplishments:**
   - Implemented secure user authentication system enabling seamless sign-up and login processes.
